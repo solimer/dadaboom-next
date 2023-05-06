@@ -11,6 +11,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { AppProps } from "next/app";
 import GlobalStyles from "../styles/GlobalStyles";
 
+// add comment
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
