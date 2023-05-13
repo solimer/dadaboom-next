@@ -1,10 +1,7 @@
 import React from "react";
 import Head from "next/head";
-
 import { createClient } from "../../prismicio";
-
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { getPlaiceholder } from "plaiceholder";
 import About from "../components/Home/About/About";
 import Counter from "../components/Home/Counter/Counter";
 import Header from "../components/Home/Header/Header";
@@ -15,6 +12,26 @@ import { SetupRepo } from "../components/SetupRepo";
 import Blog from "../components/Home/Blog/Blog";
 import Contact from "../components/Home/Contact/Contact";
 import Footer from "../components/Home/Footer/Footer";
+import dynamic from "next/dynamic";
+
+const DynamicAbout = dynamic(() => import("../components/Home/About/About"));
+const DynamicCounter = dynamic(
+  () => import("../components/Home/Counter/Counter")
+);
+const DynamicPortfolio = dynamic(
+  () => import("../components/Home/Portfolio/Portfolio")
+);
+const DynamicServices = dynamic(
+  () => import("../components/Home/Services/Services")
+);
+const DynamicTestimonials = dynamic(
+  () => import("../components/Home/Testimonials/Testimonials")
+);
+const DynamicBlog = dynamic(() => import("../components/Home/Blog/Blog"));
+const DynamicContact = dynamic(
+  () => import("../components/Home/Contact/Contact")
+);
+const DynamicFooter = dynamic(() => import("../components/Home/Footer/Footer"));
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const client = createClient({ previewData: context.previewData });
@@ -48,18 +65,18 @@ InferGetStaticPropsType<typeof getStaticProps>) => {
         <title>צפריר ליכשטנשטיין | מורה לתופים לאוטיסטים | דה דה בום</title>
       </Head>
       <Header rotatingStrings={homepage.rotatingstrings} />
-      <About
+      <DynamicAbout
         about_content={homepage.about_content}
         about_title={homepage.about_title}
         about_image={homepage.about_image}
       />
-      <Services services={homepage.services} />
-      <Counter counters={homepage.counters} />
-      <Portfolio images={homepage.images} videos={homepage.videos} />
-      <Testimonials testimonials={homepage.testimonials} />
-      <Blog />
-      <Contact />
-      <Footer />
+      <DynamicServices services={homepage.services} />
+      <DynamicCounter counters={homepage.counters} />
+      <DynamicPortfolio images={homepage.images} videos={homepage.videos} />
+      <DynamicTestimonials testimonials={homepage.testimonials} />
+      <DynamicBlog />
+      <DynamicContact />
+      <DynamicFooter />
     </>
   );
 };

@@ -6,7 +6,7 @@ const ItemNav: React.FC<{ item: { target: string; name: string } }> = ({
 }) => (
   <li>
     <AnchorLink
-      tw="hover:text-primary transition-colors"
+      // tw="hover:text-primary transition-colors"
       href={`#${item.target}`}
       className="section-link"
     >

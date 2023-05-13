@@ -16,10 +16,10 @@ const Counter: React.FC<{
               <div className="row">
                 {counters.map(({ counter, title }) => (
                   <CounterBox
+                    key={prismicH.asText(title)}
                     border
                     to={counter}
                     text={title}
-                    key={prismicH.asText(title)}
                   />
                 ))}
               </div>

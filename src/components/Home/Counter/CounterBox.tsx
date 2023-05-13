@@ -5,6 +5,7 @@ import { NumberField, RichTextField } from "@prismicio/types";
 import { PrismicText } from "@prismicio/react";
 
 const CounterBox: React.FC<{
+  key: string;
   to: NumberField;
   text: RichTextField;
   border?: boolean;
