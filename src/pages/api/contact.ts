@@ -1,5 +1,6 @@
-import { CourierClient } from "@trycourier/courier";
 import { NextApiRequest, NextApiResponse } from "next";
+import { CourierClient } from "@trycourier/courier";
+
 import { validationSchema } from "../../components/Shared/Contact/validationSchema";
 
 const contact = async function handler(
@@ -14,12 +15,20 @@ const contact = async function handler(
 
     await courier.send({
       message: {
-        to: {
-          user_id: "1234",
-          first_name: "Rafael",
-          last_name: "Paz",
-          email: process.env.CONTACT_EMAIL,
-        },
+        to: [
+          {
+            user_id: "12345",
+            first_name: "Tzafrir",
+            last_name: "Lichtenstein",
+            email: process.env.CONTACT_SECOND_EMAIL,
+          },
+          {
+            user_id: "1234",
+            first_name: "Rafael",
+            last_name: "Paz",
+            email: process.env.CONTACT_EMAIL,
+          },
+        ],
         template: "2BKS20D8N2MDRCG7ZWCJA2TKZY5Y",
         data: {
           ...data,
