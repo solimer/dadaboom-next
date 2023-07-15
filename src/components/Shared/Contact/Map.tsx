@@ -62,6 +62,7 @@ const MapWithAMakredInfoWindow = compose<MapProps, MapProps>(
     lat: map_lat,
     lng: map_lng
   };
+  console.log('@@@ ~ coordinates:', coordinates);
   return (
     // @ts-ignore
     <GoogleMap defaultZoom={16} defaultCenter={coordinates}>
