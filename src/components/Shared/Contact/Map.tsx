@@ -9,16 +9,6 @@ import {
 } from "react-google-maps";
 import { compose, withStateHandlers } from "recompose";
 
-const coordinates = {
-  lat: 32.0723871,
-  lng: 34.8140164,
-};
-
-const labelUrl =
-  "https://www.google.com/maps/place/%D7%A6%D7%A4%D7%A8%D7%99%D7%A8+%D7%9C%D7%99%D7%9B%D7%98%D7%A0%D7" +
-  "%A9%D7%98%D7%99%D7%99%D7%9F+%D7%9C%D7%99%D7%9E%D7%95%D7%93+%D7%AA%D7%95%D7%A4%D7%99%D7%9D%E2%80%AD/" +
-  "@32.072442,34.813721,16z/data=!4m5!3m4!1s0x0:0xc28cd9557039a526!8m2!3d32.0724757!4d34.8140216?hl=he-IL";
-
 const MapLabel: React.FC<
   Pick<MapProps, "map_label_link" | "map_label_text">
 > = ({ map_label_link, map_label_text }) => (
@@ -32,6 +22,7 @@ const MapLabel: React.FC<
     </a>
   </div>
 );
+
 
 type MapProps = {
   onToggleOpen: () => void;
@@ -66,9 +57,14 @@ const MapWithAMakredInfoWindow = compose<MapProps, MapProps>(
     map_lat,
     map_lng,
   } = props;
+
+  const coordinates = {
+    lat: map_lat,
+    lng: map_lng
+  };
   return (
     // @ts-ignore
-    <GoogleMap defaultZoom={16} defaultCenter={{ lat: map_lat, lng: map_lng }}>
+    <GoogleMap defaultZoom={16} defaultCenter={coordinates}>
       {/* @ts-ignore */}
       <Marker position={coordinates} onClick={onToggleOpen}>
         {/* @ts-ignore */}
