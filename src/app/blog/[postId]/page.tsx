@@ -1,4 +1,4 @@
-import { createClient } from "@/prismicio";
+import { createAppClient } from "@/prismicio";
 import Post from "@/src/components/Post/Post";
 import { useImageStore } from "@/src/lib/stores";
 import addImagesPlaceholders from "@/src/lib/utils/addImagesPlaceholders";
@@ -10,12 +10,7 @@ interface PostPageProps {
 }
 
 export async function generateStaticParams() {
-  const client = createClient({
-    fetchOptions:
-      process.env.NODE_ENV === "production"
-        ? { next: { tags: ["prismic"] }, cache: "force-cache" }
-        : { next: { revalidate: 5 } },
-  });
+  const client = createAppClient();
   const posts = await client.getAllByType("post");
 
   return posts.map((post) => ({
@@ -24,7 +19,7 @@ export async function generateStaticParams() {
 }
 
 async function getPostData(postUID: string) {
-  const client = createClient();
+  const client = createAppClient();
 
   const post = await client.getByUID("post", postUID);
   const images = await addImagesPlaceholders({ post });

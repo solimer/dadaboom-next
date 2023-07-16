@@ -12,17 +12,16 @@ import { compose, withStateHandlers } from "recompose";
 const MapLabel: React.FC<
   Pick<MapProps, "map_label_link" | "map_label_text">
 > = ({ map_label_link, map_label_text }) => (
-  <div>
+  <div className="flex w-full flex-center">
     <a
       href={"url" in map_label_link ? map_label_link.url : ""}
       target="_blank"
       rel="noopener noreferrer"
     >
-      <h4 id="firstHeading">{map_label_text}</h4>
+      <h4 className="text-red-500">{map_label_text}</h4>
     </a>
   </div>
 );
-
 
 type MapProps = {
   onToggleOpen: () => void;
@@ -60,15 +59,13 @@ const MapWithAMakredInfoWindow = compose<MapProps, MapProps>(
 
   const coordinates = {
     lat: map_lat,
-    lng: map_lng
+    lng: map_lng,
   };
-  console.log('@@@ ~ coordinates:', coordinates);
   return (
     // @ts-ignore
     <GoogleMap defaultZoom={16} defaultCenter={coordinates}>
       {/* @ts-ignore */}
       <Marker position={coordinates} onClick={onToggleOpen}>
-        {/* @ts-ignore */}
         {isOpen && (
           /* @ts-ignore */
           <InfoWindow onCloseClick={onToggleOpen}>

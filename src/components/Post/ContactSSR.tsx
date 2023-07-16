@@ -1,9 +1,9 @@
-import { createClient } from "@/prismicio";
+import { createAppClient } from "@/prismicio";
 
 import Contact from "../Shared/Contact/Contact";
 
 const getContactData = async () => {
-  const client = createClient();
+  const client = createAppClient();
   const homepageMap = await client.getSingle("homepage", {
     graphQuery: `
     {
