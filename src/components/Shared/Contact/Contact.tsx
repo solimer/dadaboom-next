@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cn from "@/src/lib/utils/cn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { KeyTextField } from "@prismicio/client";
 import { LinkField, NumberField } from "@prismicio/types";
+import * as Tooltip from "@radix-ui/react-tooltip";
 import GoogleMapReact from "google-map-react";
 import { MapPin } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -22,27 +23,42 @@ const Marker = ({
   lng: NumberField;
   label: KeyTextField;
   labelLink: LinkField;
-}) => (
-  <>
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
+  return (
     <a href={"url" in labelLink ? labelLink.url : ""} target="_blank">
       <div className="relative inline-block">
-        <div className="relative z-10 w-fit cursor-pointer rounded-md bg-white p-4 font-hebrew text-black">
-          {label}
-        </div>
-        <div className="absolute top-0">
-          <MapPin color="black" fill="red" />
-        </div>
+        <Tooltip.Provider>
+          <Tooltip.Root open={isOpen} delayDuration={0}>
+            <Tooltip.Trigger asChild>
+              <MapPin
+                color="black"
+                fill="red"
+                className="absolute bottom-full"
+                height={36}
+                width={36}
+              />
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <a href={"url" in labelLink ? labelLink.url : ""} target="_blank">
+                <Tooltip.Content
+                  className="rounded bg-white p-2 font-hebrew"
+                  sideOffset={5}
+                >
+                  {label}
+                  <Tooltip.Arrow className="fill-white" />
+                </Tooltip.Content>
+              </a>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
       </div>
     </a>
-    {/* <a href={"url" in labelLink ? labelLink.url : ""} target="_blank">
-      <div className="w-fit cursor-pointer bg-white p-4">
-        <div className="whitespace-nowrap rounded-md font-hebrew text-black">
-          {label}
-        </div>
-      </div>
-    </a> */}
-  </>
-);
+  );
+};
 
 const Contact: React.FC<
   Pick<

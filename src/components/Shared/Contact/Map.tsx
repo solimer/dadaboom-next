@@ -40,9 +40,9 @@ const MapWithAMakredInfoWindow = compose<MapProps, MapProps>(
     {
       onToggleOpen:
         ({ isOpen }) =>
-        () => ({
-          isOpen: !isOpen,
-        }),
+          () => ({
+            isOpen: !isOpen,
+          }),
     }
   ),
   withScriptjs,
