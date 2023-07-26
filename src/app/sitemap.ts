@@ -1,10 +1,10 @@
 import { MetadataRoute } from "next";
-import { createClient } from "@/prismicio";
+import { createAppClient } from "@/prismicio";
 
 const BASE_URL = "https://dadaboom.co.il";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const client = createClient();
+  const client = createAppClient();
   const homepage = await client.getSingle("homepage");
   const posts = await client.getAllByType("post");
   return [
