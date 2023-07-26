@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import { PrismicText } from "@prismicio/react";
 import { ImageField, RichTextField } from "@prismicio/types";
+import { MoveLeft } from "lucide-react";
 
 import ImageWithBlur from "../../Shared/ImageWithBlur";
 
@@ -32,9 +32,9 @@ const BlogBox: React.FC<BlogBoxProps> = ({
           <PrismicText field={description} />
         </p>
       </div>
-      <div className="tracking-[0.5pt] text-gray-800">
+      <div className="flex items-center tracking-[0.5pt] text-gray-800">
         <span className="pl-[6px]">קרא עוד</span>
-        <KeyboardBackspaceIcon className="text-primary" />
+        <MoveLeft className="text-primary" width={18} strokeWidth={3} />
       </div>
     </div>
   </Link>
