@@ -35,11 +35,12 @@ const Marker = ({
           <Tooltip.Root open={isOpen} delayDuration={0}>
             <Tooltip.Trigger asChild>
               <MapPin
-                color="black"
-                fill="red"
+                color="#b11212"
+                fill="#e94436"
                 className="absolute bottom-full"
                 height={36}
                 width={36}
+                strokeWidth={"0.75px"}
               />
             </Tooltip.Trigger>
             <Tooltip.Portal>
@@ -105,7 +106,7 @@ const Contact: React.FC<
       >
         <div className="my-container">
           <SectionTitle className="flex text-white">צור קשר</SectionTitle>
-          <div className="h-[410px] w-full">
+          <div className="mb-4 h-[410px] w-full">
             <div style={{ height: "100%", width: "100%" }}>
               <GoogleMapReact
                 defaultCenter={{
@@ -127,20 +128,6 @@ const Contact: React.FC<
                 />
               </GoogleMapReact>
             </div>
-            {/* <MapWithAMakredInfoWindow
-              // @ts-ignore
-              googleMapURL={
-                "https://maps.googleapis.com/maps/api/js?" +
-                `key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&language=he&region=IL`
-              }
-              loadingElement={<div style={{ height: "100%" }} />}
-              containerElement={<div style={{ height: "400px" }} />}
-              mapElement={<div style={{ height: "100%" }} />}
-              map_label_link={map_label_link}
-              map_label_text={map_label_text}
-              map_lat={map_lat}
-              map_lng={map_lng}
-            /> */}
           </div>
           {showSuccess && (
             <div className="flex-center">
