@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/prismicio";
 import * as z from "zod";
@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
         revalidatePath(doc.url?.includes("blog") ? "/blog/[postId]" : "/");
       })
     );
+    revalidateTag("prismic");
 
     return NextResponse.json(
       { revalidated: true, now: Date.now() },

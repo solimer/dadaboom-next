@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import cn from "@/src/lib/utils/cn";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { HomepageDocumentDataTestimonialsItem } from "../../../../prismicio-types";
 import useInterval from "../../../hooks/useInterval";
@@ -40,7 +39,7 @@ const Testimonials: React.FC<{
             className="flex flex-1 cursor-pointer justify-start"
             onClick={() => onArrowClick("left")}
           >
-            <KeyboardArrowRight style={{ fontSize: "35px" }} />
+            <ChevronRight className="transition-colors hover:text-primary" />
           </div>
           <div className="flex-[10]">
             <div className="relative min-h-[337px] pb-7 text-center">
@@ -48,7 +47,7 @@ const Testimonials: React.FC<{
                 {testimonials.map((_slider, i) => (
                   <li
                     className={cn(
-                      "mr-3 h-[6px] w-[6px] cursor-pointer rounded bg-[#c0c0c0]",
+                      "mr-3 h-[6px] w-[6px] cursor-pointer rounded bg-[#c0c0c0] transition-colors hover:bg-[#333333]",
                       i === activeIndex && "mb-px bg-[#333333]"
                     )}
                     onClick={() => onIndicatorClick(i)}
@@ -78,7 +77,7 @@ const Testimonials: React.FC<{
             className="flex flex-1 cursor-pointer justify-end"
             onClick={() => onArrowClick("right")}
           >
-            <KeyboardArrowLeft style={{ fontSize: "35px" }} />
+            <ChevronLeft className="transition-colors hover:text-primary" />
           </div>
         </div>
       </div>

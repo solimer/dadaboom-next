@@ -1,15 +1,65 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cn from "@/src/lib/utils/cn";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { KeyTextField } from "@prismicio/client";
+import { LinkField, NumberField } from "@prismicio/types";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import GoogleMapReact from "google-map-react";
+import { MapPin } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { HomepageDocumentData } from "../../../../prismicio-types";
 import GenericFormInput from "../FormInput";
 import SectionTitle from "../SectionTitle";
-import MapWithAMakredInfoWindow from "./Map";
 import { ValidationSchema, validationSchema } from "./validationSchema";
+
+const Marker = ({
+  label,
+  labelLink,
+}: {
+  lat: NumberField;
+  lng: NumberField;
+  label: KeyTextField;
+  labelLink: LinkField;
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
+  return (
+    <a href={"url" in labelLink ? labelLink.url : ""} target="_blank">
+      <div className="relative inline-block">
+        <Tooltip.Provider>
+          <Tooltip.Root open={isOpen} delayDuration={0}>
+            <Tooltip.Trigger asChild>
+              <MapPin
+                color="#b11212"
+                fill="#e94436"
+                className="absolute bottom-full"
+                height={36}
+                width={36}
+                strokeWidth={"0.75px"}
+              />
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <a href={"url" in labelLink ? labelLink.url : ""} target="_blank">
+                <Tooltip.Content
+                  className="rounded bg-white p-2 font-hebrew"
+                  sideOffset={5}
+                >
+                  {label}
+                  <Tooltip.Arrow className="fill-white" />
+                </Tooltip.Content>
+              </a>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      </div>
+    </a>
+  );
+};
 
 const Contact: React.FC<
   Pick<
@@ -56,21 +106,28 @@ const Contact: React.FC<
       >
         <div className="my-container">
           <SectionTitle className="flex text-white">צור קשר</SectionTitle>
-          <div className="h-[410px] w-full">
-            <MapWithAMakredInfoWindow
-              // @ts-ignore
-              googleMapURL={
-                "https://maps.googleapis.com/maps/api/js?" +
-                `key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&language=he&region=IL`
-              }
-              loadingElement={<div style={{ height: "100%" }} />}
-              containerElement={<div style={{ height: "400px" }} />}
-              mapElement={<div style={{ height: "100%" }} />}
-              map_label_link={map_label_link}
-              map_label_text={map_label_text}
-              map_lat={map_lat}
-              map_lng={map_lng}
-            />
+          <div className="mb-4 h-[410px] w-full">
+            <div style={{ height: "100%", width: "100%" }}>
+              <GoogleMapReact
+                defaultCenter={{
+                  lat: map_lat as number,
+                  lng: map_lng as number,
+                }}
+                defaultZoom={16}
+                options={{}}
+                bootstrapURLKeys={{
+                  key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
+                  language: "he",
+                }}
+              >
+                <Marker
+                  lat={map_lat}
+                  lng={map_lng}
+                  label={map_label_text}
+                  labelLink={map_label_link}
+                />
+              </GoogleMapReact>
+            </div>
           </div>
           {showSuccess && (
             <div className="flex-center">

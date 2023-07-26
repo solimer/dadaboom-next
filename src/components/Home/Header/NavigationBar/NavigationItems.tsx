@@ -9,14 +9,9 @@ const NavigationItems: React.FC<{
   target: "mobile" | "desktop";
   isOpen?: boolean;
 }> = ({ target, isOpen }) => {
-  const facebookLink =
-    "https://www.facebook.com/%D7%A6%D7%A4%D7%A8%D7%99%D7%A8-%D7%9C%D7%99%D7%9B%D7%98%D7%A0%D7" +
-    "%A9%D7%98%D7%99%D7%99%D7%9F-%D7%9C%D7%99%D7%9E%D7%95%D7%93-%D7%AA%D7%95%D7%A4%D7%99%D7%9D-%D7%95%D7%9B%D7%9C" +
-    "%D7%99-%D7%94%D7%A7%D7%A9%D7%94-365617346882919/";
-
   const items = navArray.map((item) => {
     if (item.target === "facebook") {
-      return <FacebookNav facebookLink={facebookLink} key="nav-facebook" />;
+      return <FacebookNav isMobile={target === "mobile"} key="nav-facebook" />;
     }
     return <ItemNav item={item} key={item.target} />;
   });
@@ -24,14 +19,12 @@ const NavigationItems: React.FC<{
     <ul
       className={cn(
         "flex-col items-center font-hebrew text-xl text-white transition-all duration-700 md:flex-row md:space-x-4 md:space-x-reverse",
-        "group-[.on-scroll]:text-black",
-        {
-          "top-20 flex h-[285px] w-full items-start space-y-3 bg-white pr-8 text-gray-800 opacity-100 md:hidden":
-            target === "mobile",
-        },
-        { "h-0 opacity-0": target === "mobile" && !isOpen },
-        { "mt-4 pt-4": isOpen },
-        { "hidden md:flex": target === "desktop" }
+        "group-[.on-scroll]:fill-black group-[.on-scroll]:text-black",
+        target === "mobile" &&
+          "top-20 flex h-[285px] w-full items-start space-y-3 bg-white pr-8 text-gray-800 opacity-100 md:hidden",
+        target === "mobile" && !isOpen && "h-0 opacity-0",
+        isOpen && "mt-4 pt-4",
+        target === "desktop" && "hidden md:flex"
       )}
     >
       {items}
