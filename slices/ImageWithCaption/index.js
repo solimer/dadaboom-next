@@ -1,6 +1,6 @@
-import { PrismicText } from "@prismicio/react";
-import * as prismicH from "@prismicio/helpers";
 import Image from "next/image";
+import * as prismicH from "@prismicio/helpers";
+import { PrismicText } from "@prismicio/react";
 
 /**
  * Component for the ImageWithCaption Slice.

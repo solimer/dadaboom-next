@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect, useRef, RefObject } from "react";
+
+import { RefObject, useEffect, useRef, useState } from "react";
 
 interface IOnScreenResponse {
   isIntersecting: boolean;

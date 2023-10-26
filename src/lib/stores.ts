@@ -1,5 +1,4 @@
-import { StateCreator } from "zustand";
-import { create } from "zustand";
+import { StateCreator, create } from "zustand";
 
 export interface ImageSlice {
   images: Record<string, string>;

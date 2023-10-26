@@ -1,5 +1,5 @@
-import { useImageStore } from "@/src/lib/stores";
 import Image from "next/image";
+import { useImageStore } from "@/src/lib/stores";
 import {
   ContainerRect,
   Slide,

@@ -7,7 +7,7 @@ import {
 
 const components: JSXMapSerializer = {
   paragraph: ({ children }) => {
-    return <p className="text-center text-lg mb-3">{children}</p>;
+    return <p className="mb-3 text-center text-lg">{children}</p>;
   },
 };
 /**

@@ -1,8 +1,8 @@
 import type { Content } from "@prismicio/client";
 import {
+  JSXMapSerializer,
   PrismicRichText,
   SliceComponentProps,
-  JSXMapSerializer,
 } from "@prismicio/react";
 
 const components: JSXMapSerializer = {
@@ -15,10 +15,10 @@ const components: JSXMapSerializer = {
     }
   },
   list: ({ children }) => {
-    return <ul className="list-disc text-lg mr-5 mb-3">{children}</ul>;
+    return <ul className="mb-3 mr-5 list-disc text-lg">{children}</ul>;
   },
   oList: ({ children }) => {
-    return <ol className="list-decimal text-lg mr-5 mb-3">{children}</ol>;
+    return <ol className="mb-3 mr-5 list-decimal text-lg">{children}</ol>;
   },
 };
 
